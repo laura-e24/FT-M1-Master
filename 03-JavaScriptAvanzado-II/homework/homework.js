@@ -43,7 +43,9 @@ function cacheFunction(cb) {
       }
       return obj[arg]
     }
-  } 
+  }
+
+  
   return sumador // se retorna esa fn
 
   /*
