@@ -39,13 +39,17 @@ LinkedList.prototype.add = function (data) {
 LinkedList.prototype.remove = function () {
   let current = this.head;
 
-  if (!current) return null;
-  if (!current.next) {
+  if (!this.head) return null;
+  else if (!current.next) {
     let removed = current.value;
     current = null;
     this.head = null;
     return removed;
   };
+
+  while (current.next.next) {
+    current = current.next;
+  }
 
   let removed = current.next.value;
   current.next = null;
@@ -88,7 +92,7 @@ function HashTable() {
 }
 HashTable.prototype.hash = function (i) {
   const string = i.split('')
-  const totalSum = string.reduce((acc, curr, i) => {
+  const totalSum = string.reduce((acc, curr) => {
     return +acc + curr.charCodeAt()
   }, 0)
 
