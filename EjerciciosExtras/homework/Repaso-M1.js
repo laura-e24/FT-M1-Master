@@ -1,8 +1,8 @@
 const {
-    Queue,
-    Node,
-    LinkedList,
-    BinarySearchTree
+  Queue,
+  Node,
+  LinkedList,
+  BinarySearchTree
 } = require('./DS.js')
 
 // Implementar la función countArray: a partir de un array en el cual cada posición puede ser un único
@@ -15,8 +15,13 @@ const {
 // [Para más información del método: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/isArray]
 
 var countArray = function(array) {
-    // Tu código aca:
-    
+  // Tu código aca:
+  return array.reduce((acc, curr) => {
+    if (Array.isArray(curr)) {
+      return acc + countArray(curr)
+    }
+    return acc + curr
+  }, 0)
 }
 
 
@@ -38,8 +43,19 @@ var countArray = function(array) {
 // Propiedades: a, a1, a2, a3, f, a, c, o, b, c --> 10 en total
 
 var countProps = function(obj) {
-    // Tu código aca:
+  // Tu código aca:
+  const transformObj = (object) => Object.values(object);
+  let length = 0;
+  const array = transformObj(obj)
 
+  array.forEach(curr => {
+    if (typeof curr === 'object' && !Array.isArray(curr)) {
+      length = length + countProps(curr)
+    } 
+    length = length + 1;
+  })
+
+  return length;
 }
 
 
@@ -52,8 +68,38 @@ var countProps = function(obj) {
 //    Ahora la lista quedaría: Head --> [1] --> ['2'] --> [false] --> ['Kirikocho] y la función debería haber devuelto el valor 1
 
 LinkedList.prototype.changeNotNumbers = function(){
-    // Tu código aca:
+  // Tu código aca:
 
+  // Primero guardo en una variable el head de la lista
+  // para poder recorrerla
+  let current = this.head;
+
+  // Establezco un contador que vaya almacenando cuántos cambios se efectuaron
+  let counter = 0;
+
+  // Mientras que siga habiendo elementos...
+  while (current) {
+    // Si al intentar transformar en número el valor del nodo
+    // el resultado es NaN, significa que no puede ser transformado,
+    // por tanto modifico ese valor
+    if (isNaN(Number(current.value))) {
+      // el contador se incrementa
+      counter++;
+      // almaceno el valor del nodo ANTES de modificarlo
+      let changed = current.value;
+      // modifico el valor del nodo
+      current.value = 'Kiricocho';
+      // el valor que originalmente tenía ahora pasa a ser null
+      changed = null; 
+    }
+    // el bucle debe continuar hasta que no hayan más nodos,
+    // para lo cual establezo el nodo actual en el siguiente de la lista.
+    // de esta manera, puede seguir siendo recorrida
+    current = current.next;
+  }
+
+  // retorno cuántos cambios se hicieron
+  return counter;
 }
 
 
@@ -66,8 +112,26 @@ LinkedList.prototype.changeNotNumbers = function(){
 // IMPORTANTE: NO son arreglos sino que son Queues.
 
 var mergeQueues = function(queueOne, queueTwo) {
-    // Tu código aca:
+  // Tu código aca:
 
+  // Creo una queue para mergear las queues de parámetros
+  let queue = new Queue()
+
+  // Si alguna de las dos tiene 0 elementos, dejo de buclar/buclear/whatever
+  while (queueOne.size() || queueTwo.size()) {
+    // Llamo a la fn dequeue para tomar el primer
+    // elemento de la queue y retornarlo, y eso lo hago
+    // con ambas y las guardo
+    let a = queueOne.dequeue()
+    let b = queueTwo.dequeue()
+
+    // si a ó b existen, las mergeo en la queue creada llamando a la fn enqueue
+    if (a) queue.enqueue(a)
+    if (b) queue.enqueue(b)
+  }
+
+  // Retorno esa queue con los merge
+  return queue;
 }
 
 
@@ -81,14 +145,14 @@ var mergeQueues = function(queueOne, queueTwo) {
 // - multBySix(4) --> 24
 
 var closureMult = function(multiplier) {
-    // Tu código aca:
+  // Tu código aca:
 
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
 // que debe retornar la suma total de los valores dentro de cada nodo del arbol
 BinarySearchTree.prototype.sum = function() {
-    // Tu código aca:
+  // Tu código aca:
 
 }
 

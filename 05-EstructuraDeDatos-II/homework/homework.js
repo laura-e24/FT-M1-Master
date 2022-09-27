@@ -22,17 +22,24 @@ function Node(value) {
 
 
 LinkedList.prototype.add = function (data) {
+  // Se crea un nuevo nodo con el valor indicado por parámetro
   let node = new Node(data);
+  // El primer nodo es almacenado en la propiedad head
   let current = this.head;
 
+  // Si la lista está vacía, el head será el nuevo nodo
   if (!current) {
     this.head = node;
     return node;
   }
+  // Mientras sigan habiendo elementos en la lista...
   while (current.next) {
+    // Establezco el nodo actual en el siguiente de la lista
+    // para poder seguir recorriéndola
     current = current.next;
   }
 
+  // El nuevo es insertado en la propiedad next del nodo actual
   current.next = node;
 }
 

@@ -17,6 +17,7 @@ function DecimalABinario(num) {
     binary.unshift(Math.floor(num) % 2)
     num = num / 2
   }
+ 
   return binary.join('')
 }
 

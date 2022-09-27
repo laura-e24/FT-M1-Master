@@ -25,6 +25,10 @@ function nFibonacci(n) {
   else if (n == 1) return 1;
 
   else return nFibonacci(n - 1) + nFibonacci(n - 2)
+  // Esto lo que hace es llamar a la fn con n - 1 y n - 2 y sumar esos resuktados,
+  // por lo que cada llamado es un nuevo contexto que ahora toma
+  // ese n decrementado como parámetro. Así hasta toparse con
+  // alguna de las condiciones.
 }
 
 /*

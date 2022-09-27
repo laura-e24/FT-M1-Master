@@ -67,7 +67,7 @@ if (true) {
     console.log(instructor); // The Flash
     console.log(pm); // Reverse Flash
 }
-console.log(instructor); // Tony
+console.log(instructor); // The Flash
 console.log(pm); // Franco
 ```
 ### Coerción de Datos
@@ -75,6 +75,8 @@ console.log(pm); // Franco
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
+// ** IMPORTANTE **: Si hay una suma de strings, se concatenan. El resto de las operaciones (resta, mult, div) NO ESTÁN DEFINIDAS PARA STRINGS,
+// por lo que JS intenta castear los valores a números para poder realizar esas operaciones.
 6 / "3" // 2
 "2" * "3" // 6
 4 + 5 + "px" // "9px"
@@ -88,9 +90,12 @@ parseInt("09") // 9
 2 && 5 // 5
 5 || 0 // 5
 0 || 5 // 5
-[3]+[3]-[10] // 23
-3>2>1 // false
-[] == ![] // true
+[3]+[3]-[10] // 23 ---> concatena los 3 en string, luego los castea a Number y resta el 10
+3>2>1 // false ---> 3 > 2 ? true => true > 1 ? false
+[] == ![] // true ---> el igual NO estricto intenta castear los valores para forzar a que se cumpla la igualdad. Entonces tenemos:
+// Number([]) == Number(![]) => ambos dan 0, por lo que 0 == 0 es true.
+// El igual estricto NO castea, compara valor y tipo de dato, entonces tendríamos un ARRAY siendo igualado a un BOOLEANO porque
+// el operador NOT (!) castea a booleano. Por tanto: [](array) === ![](booleano) => es false. Tienen mismo valor pero != tipo de dato
 ```
 
 > Si te quedó alguna duda repasá con [este artículo](http://javascript.info/tutorial/object-conversion).
@@ -167,4 +172,4 @@ function printing() {
 }
 
 printing();
-```
+``` 
