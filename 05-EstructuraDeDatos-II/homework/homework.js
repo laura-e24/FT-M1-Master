@@ -44,23 +44,7 @@ LinkedList.prototype.add = function (data) {
 }
 
 LinkedList.prototype.remove = function () {
-  let current = this.head;
-
-  if (!this.head) return null;
-  else if (!current.next) {
-    let removed = current.value;
-    current = null;
-    this.head = null;
-    return removed;
-  };
-
-  while (current.next.next) {
-    current = current.next;
-  }
-
-  let removed = current.next.value;
-  current.next = null;
-  return removed
+  
 }
 
 LinkedList.prototype.search = function (x) {
@@ -106,32 +90,7 @@ HashTable.prototype.hash = function (i) {
   return totalSum % this.numBuckets
 }
 HashTable.prototype.set = function (key, value) {
-  const hashedKey = this.hash(key)
-  const indexExists = this.object.hasOwnProperty(hashedKey)
-  const entryHasKey = this.hasKey(key)
-
-  if (indexExists) {
-    if (entryHasKey) {
-      this.object = {
-        ...this.object,
-        [hashedKey]: {[key]: value}
-      }
-    } else {
-      this.object = {
-        ...this.object,
-        [hashedKey]: {
-          ...this.object[hashedKey],
-          ...{[key]: value}
-        }
-      }
-    }
-  } else {
-    this.object = {
-      ...this.object,
-      [hashedKey]: {[key]: value}
-    }
-    this.length++
-  }
+ 
 }
 HashTable.prototype.get = function (key) {
   const hashedKey = this.hash(key);

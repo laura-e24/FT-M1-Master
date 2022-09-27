@@ -35,18 +35,7 @@ function insertionSort(array) {
   // el array recibido como parámetro utilizando arreglos
   // Devolver el array ordenado resultante
   // Tu código:
-  let sortedArray = array;
  
-  for (let i = 1;i < array.length;i++) {
-    array.forEach((val, index, arr) => {
-      if (arr[i] < val) {
-        sortedArray[index] = arr[i];
-        arr[i] = val;
-      } 
-    })
-  }
-
-  return sortedArray;
 }
 
 function selectionSort(array) {
