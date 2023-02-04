@@ -7,6 +7,30 @@ function quickSort(array) {
   // Devolver el array ordenado resultante
   // Tu código:
 
+  // si el array ya tiene length 1, corto la recursión
+  if (array.length <= 1) return array;
+
+  // debo obtener el pivote
+  let pivote = array[0]
+
+  // genero dos arrays en donde irán
+  // a parar los elementos de la lista
+  let a = []
+  let b = []
+
+  // itero sobre cada elemento para ir
+  // pusheando los mayores y menores al pivote
+  for (let i = 1; i < array.length; i++) {
+    if (array[i] < pivote) a.push(array[i])
+    else b.push(array[i])
+  }
+
+  // redefinimos a y b para que se les aplique la recursión
+  // hasta que queden arrays de length 1
+  a = quickSort(a)
+  b = quickSort(b)
+
+  return a.concat(pivote).concat(b)
 }
 
 function mergeSort (array) {
@@ -17,9 +41,7 @@ function mergeSort (array) {
 
   // Una vez el array tenga length 1, dejo de
   // llamar a la fn, por tanto también dejo de dividir el array
-  // y lo devuelvo tal como está. este será el punto de partida
-  // o el punto de corte de la función, a partir del cual 
-  // operará la misma
+  // y lo devuelvo tal como está, cortando la recursión
   if (array.length <= 1) return array;
 
   // Si el array tiene length mayor a 1 entonces debo dividirlo,
@@ -32,11 +54,11 @@ function mergeSort (array) {
 
   // a y b no son fijos, deben modificarse según el resultado que tenían inicialmente.
   // es decir, si a ó b dieron un array cuyo length es mayor a 1, tengo que volver a dividirlo,
-  // por ende, las redefino con el resultado del merge de ese valor inicial
+  // por ende, los redefino con el resultado de su recursión
   a = mergeSort(a)
   b = mergeSort(b)
-  
-  // acá tengo que verificar si tanto a como b tienen elementos (más de 1, ya que si es igual a 1, la fn se habrá cortado).
+
+  // acá tengo que verificar si tanto a como b tienen elementos (más de 1).
   // si ambos tienen, paso a comparar sus elementos en posición 0
   // si no, continúo diviendo aquel que tenga más de 1
   while (a.length && b.length) {
@@ -55,19 +77,18 @@ function mergeSort (array) {
   // el array sobre el cual operamos ahora equivale a sí mismo (los elementos que ya tiene)
   // concatenado con a y con b
   array = array.concat(a, b)
-  
+
 
   // finalmente, retorno el mismo array que recibimos como parámetro, pero
   // mutado de la forma correspondiente según cuánto valga en cada llamado.
   // por eso se utiliza recursión: para saber qué retorna mergeSort, debo
-  // llamarla tantas veces como sea necesario, hasta que el array quede
-  // descompuesto en un sólo elemento, a partir del cual se lo retornará
-  // sin más modificaciones (llegamos al caso base), y a partir de allí 
-  // se van resolviendo todas las llamadas que se hicieron previamente, 
-  // (las cuales quedaron en la pila, pero sin ser resueltas)
-  // basándonos, justamente, en este array indivisible de manera recursiva 
-  // hasta que finalmente obtengamos el array original completo y ordenado.
-  return array; 
+  // llamarla hasta que el array quede descompuesto en un sólo elemento, 
+  // a partir del cual se lo retornará sin más modificaciones 
+  // (llegamos al caso base), y a partir de allí se van resolviendo 
+  // todas las llamadas que se hicieron previamente, (las cuales quedaron 
+  // en la pila, pero sin ser resueltas) hasta que finalmente obtengamos 
+  // el array original completo y ordenado.
+  return array;
 }
 // No modificar nada debajo de esta línea
 // --------------------------------

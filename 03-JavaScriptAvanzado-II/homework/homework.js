@@ -2,15 +2,7 @@
 
 // Closures
 
-function counter() {
-    
-  let cuenta = 0
-  function contar() {
-    cuenta = cuenta + 1
-    return cuenta
-  }
-  return contar;
-  /*
+/*
   Ejercicio 1
 
   La función counter debe retornar otra función. Esta función retornada debe actuar como un contador, retornando un valor numérico que empieza en 1 e incrementa con cada invocación.
@@ -26,27 +18,17 @@ function counter() {
   otroContador()      // 2
   otroContador()      // 3
    */
+
+function counter() {
+    
+  let cuenta = 0
+  function contar() {
+    cuenta = cuenta + 1
+    return cuenta
+  }
+  return contar;
 }
 
-
-function cacheFunction(cb) {
-
-
-  let obj = {} // acá se guardaría el resultado de c/operación
-  
-  const sumador = (arg) => { // esta fn haría la operación
-   
-    if (obj.hasOwnProperty(arg)) return obj[arg]
-    else {
-      obj = {
-        [arg]: cb(arg)
-      }
-      return obj[arg]
-    }
-  }
-
-  
-  return sumador // se retorna esa fn
 
   /*
   Ejercicio 2
@@ -73,9 +55,32 @@ function cacheFunction(cb) {
 
   */
 
+function cacheFunction(cb) {
+
+  let obj = {} // acá se guardaría el resultado de c/operación
+  
+  const sumador = (arg) => { // esta fn haría la operación
+    if (obj.hasOwnProperty(arg)) return obj[arg]
+    else {
+      obj = {
+        [arg]: cb(arg)
+      }
+      return obj[arg]
+    }
+  }
+
+  return sumador // se retorna esa fn
 }
 
 // Bind
+
+/*
+  Ejercicio 3
+
+  IMPORTANTE: no modificar el código de arriba (variables instructor y alumno, y función getNombre)
+
+  Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
+*/
 
 var instructor = {
   nombre: "Franco",
@@ -90,14 +95,6 @@ var alumno = {
 function getNombre() {
   return this.nombre;
 }
-
-/*
-  Ejercicio 3
-
-  IMPORTANTE: no modificar el código de arriba (variables instructor y alumno, y función getNombre)
-
-  Usando el método bind() guardar, en las dos variables declaradas a continuación, dos funciones que actúen como getNombre pero retornen el nombre del instructor y del alumno, respectivamente.
-*/
 
 let getNombreInstructor = getNombre.bind(instructor);
 let getNombreAlumno = getNombre.bind(alumno);

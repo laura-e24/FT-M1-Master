@@ -147,6 +147,9 @@ var mergeQueues = function(queueOne, queueTwo) {
 var closureMult = function(multiplier) {
   // Tu código aca:
 
+  return function(num){
+    return num * multiplier
+  }
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
@@ -154,6 +157,12 @@ var closureMult = function(multiplier) {
 BinarySearchTree.prototype.sum = function() {
   // Tu código aca:
 
+  let counter = this.value;
+
+  if (!this.left && !this.right) return this.value;
+  if (this.left && !this.right)  return counter + this.left.sum()
+  else if (!this.left && this.right) return counter + this.right.sum()
+  else return counter + this.left.sum() + this.right.sum()
 }
 
 module.exports = {
